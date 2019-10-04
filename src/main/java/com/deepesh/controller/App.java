@@ -47,12 +47,12 @@ public class App
         
         
 //------------To Update Document MongoDB------------------"
-        /*BasicDBObject query=new BasicDBObject()
+        BasicDBObject query=new BasicDBObject()
         					.append("name", "Deepesh");
         BasicDBObject update=new BasicDBObject()
         					.append("$set", new BasicDBObject()
         									.append("empid", 101));
-        MongoDbMethod.updateData(query, update);*/
+        MongoDbMethod.updateData(query, update);
         
     }
 }
