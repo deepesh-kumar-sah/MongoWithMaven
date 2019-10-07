@@ -12,7 +12,9 @@ public class Util {
 						 
 						 HOST_NAME="localhost",
 						 
-						 PORT="27017",
+						 Host_IP="127.0.0.1",
+						 
+						 PORT_NO="27017",
 						 
 						 HOST_NAME_COMPASS="@cluster0-loga8.mongodb.net",
 						 

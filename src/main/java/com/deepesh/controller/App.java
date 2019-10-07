@@ -24,6 +24,27 @@ public class App
     {
         System.out.println( "--------Main method--------" );
 
+
+//------------To Insert Document in MongoDB------------------"
+		
+//		 Address address=new Address("Tin Factory","Bangalore","Karnataka","India",980045); 
+//		 Employee employee=new Employee(102,"Rohit","7909872455",5,address);
+//		 
+//		 BasicDBObject obj=(BasicDBObject) JSON.parse(employee.toString());
+//		 MongoDbMethod.insertData(obj);
+		 
+        
+//------------To Retrieve MongoDB Document------------------"
+        //MongoDbMethod.retrieveData();
+        MongoDbMethod.retrieveData_By_Name("Deepesh","Ayush","mohit","gopal");
+        
+//------------To Update Document MongoDB------------------"
+		/*
+		 * BasicDBObject query=new BasicDBObject() .append("name", "Deepesh");
+		 * BasicDBObject update=new BasicDBObject() .append("$set", new BasicDBObject()
+		 * .append("empid", 101)); MongoDbMethod.updateData(query, update);
+		 */
+        
 //------------To Delete Document From MongoDB------------------"
         //MongoDbMethod.deleteUsing_Key_StringArray_$eq("name", "Deepesh");
         //MongoDbMethod.deleteUsing_Key_StringArray_$in("name", "Sahil","Ankush","Ismil");
@@ -33,26 +54,5 @@ public class App
         MongoDbMethod.deleteUsing_Key_ArrayList_$in("name", names);*/
         
 
-//------------To Insert Document in MongoDB------------------"
-		/*Address address=new
-		  Address("Marathali","Bangalore","Karnataka","India",12345); Employee
-		  employee=new Employee(101,"Deepesh","9803475225",1,address);
-		  
-		  BasicDBObject obj=(BasicDBObject) JSON.parse(employee.toString());
-		  MongoDbMethod.insertData(obj);*/
-        
-        
-//------------To Retrieve MongoDB Document------------------"
-        //MongoDbMethod.retrieveData();
-        
-        
-//------------To Update Document MongoDB------------------"
-        BasicDBObject query=new BasicDBObject()
-        					.append("name", "Deepesh");
-        BasicDBObject update=new BasicDBObject()
-        					.append("$set", new BasicDBObject()
-        									.append("empid", 101));
-        MongoDbMethod.updateData(query, update);
-        
     }
 }

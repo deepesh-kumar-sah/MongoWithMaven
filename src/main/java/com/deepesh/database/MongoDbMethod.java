@@ -2,6 +2,7 @@ package com.deepesh.database;
 
 import java.util.List;
 
+import com.deepesh.util.Helper;
 import com.deepesh.util.Util;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -25,6 +26,7 @@ public class MongoDbMethod {
 			clienturi=new MongoClientURI(Util.URI);
 			client=new  MongoClient(clienturi);
 			
+			//client= new MongoClient(Util.Host_IP,Integer.parseInt(Util.PORT_NO));
 			//MongoDatabase mdb=client.getDatabase(Util.DB_NAME);
 			db=client.getDB(Util.DB_NAME);
 			
@@ -53,9 +55,49 @@ public class MongoDbMethod {
 	public static void retrieveData() {
 		try {
 			cursor=dbcol.find();
+			System.out.println(cursor.count());
 			while (cursor.hasNext()) {
 				dbobject=cursor.next();
-				System.out.println(cursor.next());
+				System.out.println(dbobject.get("name")+" ,  "+dbobject.get("mobile"));
+			}
+			System.out.println("Record_Retrieved Successful");
+			
+		} catch (Exception e) {
+			System.out.println("-----------Exception occurs during Retrieve----------- ");
+			e.printStackTrace();
+		}
+		
+	}
+	public static void retrieveData_By_Name(String name) {
+		try {
+			cursor=dbcol.find();
+			System.out.println(cursor.count());
+			while (cursor.hasNext()) {
+				dbobject=cursor.next();
+				if (name.equalsIgnoreCase((String)dbobject.get("name"))) {
+					System.out.println(dbobject.get("name")+" ,  "+dbobject.get("mobile"));
+				}
+				//System.out.println(dbobject.get("name"));
+			}
+			System.out.println("Record_Retrieved Successful");
+			
+		} catch (Exception e) {
+			System.out.println("-----------Exception occurs during Retrieve----------- ");
+			e.printStackTrace();
+		}
+		
+	}
+
+	public static void retrieveData_By_Name(String...names) {
+		try {
+			cursor=dbcol.find();
+			System.out.println(cursor.count());
+			int count=0;
+			while (cursor.hasNext()) {
+				dbobject=cursor.next();
+				if (Helper.isStringExist((String)dbobject.get("name"), names)) {
+					System.out.println(dbobject.get("name")+" ,  "+dbobject.get("mobile"));
+				}
 				//System.out.println(dbobject.get("name"));
 			}
 			System.out.println("Record_Retrieved Successful");
