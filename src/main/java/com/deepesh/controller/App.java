@@ -36,7 +36,12 @@ public class App
         
 //------------To Retrieve MongoDB Document------------------"
         //MongoDbMethod.retrieveData();
-        MongoDbMethod.retrieveData_By_Name("Deepesh","Ayush","mohit","gopal");
+        //MongoDbMethod.retrieveData_By_Name("Deepesh","Ayush","mohit","gopal"); 
+        
+        //MongoDbMethod.retrieve_key_values("street","Marathali","RT Nagar","Tin Factory","Btm");
+        //MongoDbMethod.retrieve_key_values("empid", 101,102,103);
+        MongoDbMethod.retrieve_key_values("age", 20,21,22);
+        
         
 //------------To Update Document MongoDB------------------"
 		/*

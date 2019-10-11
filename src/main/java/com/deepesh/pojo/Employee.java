@@ -2,6 +2,10 @@ package com.deepesh.pojo;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
+@JsonIgnoreProperties("_id")
 public class Employee implements Serializable{
 	
 	private int empid;
@@ -54,7 +58,7 @@ public class Employee implements Serializable{
 	@Override
 	public String toString() {
 		return "{ empid:" + empid + ", name:\"" + name + "\", mobile:\"" + mobile + "\", age:" + age + ", address:"
-				+ address + " }, {unique:true}";
+				+ address + " }";
 	}
 	
 	

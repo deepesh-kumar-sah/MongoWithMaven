@@ -1,9 +1,17 @@
 package com.deepesh.database;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
+import org.bson.BasicBSONObject;
+
+import com.deepesh.pojo.Address;
+import com.deepesh.pojo.Employee;
 import com.deepesh.util.Helper;
 import com.deepesh.util.Util;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -20,6 +28,7 @@ public class MongoDbMethod {
 	public static DBCollection dbcol;
 	public static DBCursor cursor;
 	public static DBObject dbobject;
+	public static BasicBSONObject dbobject_addr;
 	
 	static {
 		try {
@@ -58,6 +67,7 @@ public class MongoDbMethod {
 			System.out.println(cursor.count());
 			while (cursor.hasNext()) {
 				dbobject=cursor.next();
+				System.out.println(dbobject);
 				System.out.println(dbobject.get("name")+" ,  "+dbobject.get("mobile"));
 			}
 			System.out.println("Record_Retrieved Successful");
@@ -108,7 +118,50 @@ public class MongoDbMethod {
 		}
 		
 	}
+	
+	
+	public static void retrieve_key_values(String key,Object...values) {
+		
+		try {
+			cursor=dbcol.find();
+	
+			ArrayList al=new ArrayList();
+			Collections.addAll(al, values);
+			System.out.println("Input "+al);
+			
+			while (cursor.hasNext()) {
+				dbobject=cursor.next();
+				dbobject_addr=(BasicBSONObject)dbobject.get("address");
+				ObjectMapper mapper=new ObjectMapper();
+				
+				if (Util.EMP_KEY.contains(key)) {
+					if (al.contains(dbobject.get(key))) {
+						
+						Employee emp=mapper.readValue(dbobject.toString(), Employee.class);
+						Address addr=emp.getAddress();
+						
+						System.out.println("------------Employee----------");
+						System.out.println(emp.getEmpid()+"\n"+emp.getName()+"\n"+emp.getAge()+"\n"+emp.getMobile()+"\n"+"\t--------Address--------\n\t"+addr.getStreet()+"\n\t"+addr.getCity()+"\n\t"+addr.getState()+"\n\t"+addr.getCountry()+"\n\t"+addr.getPin());
+					}
+				}else {
+					if (al.contains(dbobject_addr.get(key))) {
+						
+						Employee emp=mapper.readValue(dbobject.toString(), Employee.class);
+						Address addr=emp.getAddress();
+						
+						System.out.println("------------Employee Addr----------");
+						System.out.println(emp.getEmpid()+"\n"+emp.getName()+"\n"+emp.getAge()+"\n"+emp.getMobile()+"\n"+"\t--------Address--------\n\t"+addr.getStreet()+"\n\t"+addr.getCity()+"\n\t"+addr.getState()+"\n\t"+addr.getCountry()+"\n\t"+addr.getPin());
+					}
+				}
+				
+			}
+			
 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void updateData(BasicDBObject query,BasicDBObject update) {
 		try {
 			
@@ -120,7 +173,7 @@ public class MongoDbMethod {
 			System.out.println("-----------Exception occurs during Update----------- ");
 			e.printStackTrace();
 		}
-	}
+	} 
 
 	public static void deleteUsing_Key_Val(String key,String val) {
 		try {
